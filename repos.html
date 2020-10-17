@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <title>GitHub Api using Angular JS</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="js/angular.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="searchRepo.js" charset="utf-8"></script>
+  </head>
+ 
+  <body ng-controller="MainCtrl">
+  <nav class="navbar navbar-expand-lg navbar-light bg-info">
+    <a class="navbar-brand" href="#">GithubREST</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+<div class="container" style="padding-top:40px;">
+	<div class="text-center">
+		    <h1>Github Repositories</h1>
+	</div>
+    <!-- search form for github users -->
+    <form ng-submit="search(username)">
+      <input type="search" ng-model="username" class="form-control">
+      <br>
+      <div class="text-center mr-2">
+      	<input type="submit" value="Find User Repositories" class="btn btn-info">
+          <a type="button"   class="btn btn-secondary" href="searchUser.html"> Go Back </a>
+      </div>
+
+    </form>
+    <!-- details of searched github users -->
+    <div>
+      {{error}}
+    </div>
+    <table class="table">
+      <tr>
+        <th> Repository Name </th>
+        <th> Description </th>
+        <th> Repository URL </th>
+      </tr>
+      <tr ng-repeat="user in users">
+        <td> {{user.name}}</td>
+        <td> {{user.description}} </td>
+        <td>  <a href = "{{user.url}}"> {{user.url}} </a> </td>
+      </tr>
+
+    <hr>
+</div>
+    <!-- ends details of searched github users -->
+  </body>
+</html>

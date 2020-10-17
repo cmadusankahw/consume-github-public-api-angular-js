@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <title>GitHub Api using Angular JS</title>
+    <script src="js/angular.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="sortRepo.js" charset="utf-8"></script>
+  </head>
+  <body ng-controller="MainCtrl">
+    <h1>GitHub Viewer</h1>
+    <!-- search form for github users -->
+    <form ng-submit="search(username)">
+      <input type="search" ng-model="username">
+      <input type="submit" value="Submit">
+    </form>
+
+    <!-- error displayed if seaarch failed -->
+    <div>
+      {{error}}
+    </div>
+    <!-- end error displayed if seaarch failed -->
+
+    <!-- details of searched github users -->
+    <div>
+      {{user.name}}
+    </div>
+    <div>
+      {{user.location}}
+    </div>
+    <div>
+      <img ng-src="{{user.avatar_url}}" alt="{{user.name}}">
+    </div>
+    <!-- end details of searched github users -->
+
+    <!-- select input for sorting -->
+    <select ng-model="orderSortBy">
+      <option value="+name">Name</option>
+      <option value="-stargazers_count" selected>Stars</option>
+      <option value="+language">Language</option>
+      <option value="+license">License</option>
+    </select>
+    <!-- table to display repositories -->
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Stars</th>
+          <th>Language</th>
+          <th>license</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="repo in repos | orderBy: orderSortBy">
+          <th>{{repo.name}}</th>
+          <th>{{repo.stargazers_count}}</th>
+          <th>{{repo.language}}</th>
+          <th>{{repo.license.name}}</th>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
